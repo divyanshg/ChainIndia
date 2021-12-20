@@ -185,6 +185,8 @@ class BlockChain {
         this.addTransaction(txn);
         console.log(txn)
 
+        this.io.emit('ADD_WALLET', wallet)
+
         return wallet.getAddress()
     }
 

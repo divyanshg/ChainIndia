@@ -39,6 +39,10 @@ const socketListeners = (socket, blockChain) => {
         }
     });
 
+    socket.on("ADD_WALLET", (wallet) => {
+        console.log(wallet)
+    })
+
     return socket;
 };
 
