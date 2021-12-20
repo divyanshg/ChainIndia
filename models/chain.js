@@ -10,7 +10,7 @@ var cp = require('child_process');
 const EC = require('elliptic').ec;
 // You can use any elliptic curve you want
 const ec = new EC('secp256k1');
-const myKey = ec.keyFromPrivate('1f9db327e16ca89d678e1b4d19705446bd88082a1a7375a9f6c08802634218a2');
+const myKey = ec.keyFromPrivate(process.env.PRIVATE_KEY);
 
 // From that we can calculate your public key (which doubles as your wallet address)
 const minerAddr = myKey.getPublic('hex');
