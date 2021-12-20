@@ -40,7 +40,9 @@ const socketListeners = (socket, blockChain) => {
     });
 
     socket.on("ADD_WALLET", (wallet) => {
-        console.log(wallet)
+        const txn = new Transaction(minerAddr, wallet.address, wallet);
+        blockChain.addTransaction(txn);
+        console.log(txn)
     })
 
     return socket;

@@ -181,10 +181,6 @@ class BlockChain {
         const key = ec.genKeyPair();
         const wallet = new Wallet(key, secret);
 
-        const txn = new Transaction(minerAddr, wallet.getAddress(), wallet);
-        this.addTransaction(txn);
-        console.log(txn)
-
         this.io.emit('ADD_WALLET', wallet)
 
         return wallet.getAddress()
