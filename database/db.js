@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 module.exports = () => {
-    mongoose.connect('mongodb://localhost:27017/ChainIndia', {
+    mongoose.connect(process.env.SRV, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
