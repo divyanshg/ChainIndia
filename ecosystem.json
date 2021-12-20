@@ -1,0 +1,8 @@
+{
+    "apps": [{
+        "name": "ledger",
+        "script": "./ledger.js",
+        "instances": 2,
+        "exec_mode": "cluster"
+    }]
+}

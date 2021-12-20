@@ -1,0 +1,29 @@
+{
+  "name": "chainindia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
+    "cryptojs": "^2.5.3",
+    "debug": "^4.3.3",
+    "dotenv": "^10.0.0",
+    "elliptic": "^6.5.4",
+    "express": "^4.17.2",
+    "keccak": "^3.0.2",
+    "merkletreejs": "^0.2.27",
+    "mongoose": "^6.1.2",
+    "rlp": "^2.2.7",
+    "simple-encryptor": "^4.0.0",
+    "socket.io": "^4.4.0",
+    "socket.io-client": "^4.4.0",
+    "zlib": "^1.0.5"
+  }
+}
