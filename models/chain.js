@@ -101,7 +101,6 @@ class BlockChain {
                 previousHash: block.previousHash,
                 nonce: block.nonce,
                 miner: block.miner,
-                merkleRoot: block.merkleRoot,
             }
 
             tmpio.emit(actions.END_MINING, unVerifiedBlock, minerAddr);
