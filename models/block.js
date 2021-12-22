@@ -29,15 +29,15 @@ class Block {
      * @param {Transaction[]} transactions
      * @param {string} previousHash
      */
-    constructor(timestamp, transactions, previousHash = '') {
+    constructor(timestamp, transactions, previousHash = '', nonce = 0, miner = null) {
         this.version = process.env.VERSION;
         this.previousHash = previousHash;
         this.timestamp = timestamp;
         this.transactions = transactions;
-        this.nonce = 0;
+        this.nonce = nonce;
         this.merkleRoot = this.transactions ? calculateMerkleRoot(this.transactions) : '';
         this.confirmations = 0;
-        this.miner = minerAddress;
+        this.miner = miner ? miner : minerAddress;
         this.numberOfTransactions = this.transactions ? this.transactions.length : 0;
         this.size = new TextEncoder().encode(JSON.stringify(this)).length /1024
         this.hash = this.calculateHash();
@@ -73,6 +73,13 @@ class Block {
             console.log(`Block mined: ${this.hash}`);
         }
         return
+    }
+
+    verifyBlock(difficulty) {
+        if(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')) {
+            return false;
+        }
+        return true;
     }
 
     parseBlock(block) {

@@ -95,7 +95,15 @@ class BlockChain {
             thisChain.io = undefined
             thisChain.nodes = undefined
 
-            tmpio.emit(actions.END_MINING, thisChain, minerAddr);
+            let unVerifiedBlock = {
+                timestamp: block.timestamp,
+                transactions: block.transactions,
+                previousHash: block.previousHash,
+                nonce: block.nonce,
+                miner: block.miner
+            }
+
+            tmpio.emit(actions.END_MINING, unVerifiedBlock, minerAddr);
 
             thisChain.io = tmpio
             thisChain.nodes = tmpnode

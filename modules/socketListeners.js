@@ -20,23 +20,26 @@ const socketListeners = (socket, blockChain) => {
         console.info(`Added transaction`, transaction.hash);
     });
 
-    socket.on(SocketActions.END_MINING, (newChain, miner) => {
+    socket.on(SocketActions.END_MINING, (unverifiedBlock, miner) => {
         if(miner == minerAddr) return
         console.log('End Mining encountered');
         
         process.env.BREAK = "true";
         blockChain.miner.kill()
 
-        const chainIndia = new Blockchain();
+        const block = new Block(unverifiedBlock.timestamp, unverifiedBlock.transactions, unverifiedBlock.previousHash, unverifiedBlock.nonce, unverifiedBlock.miner);
+        console.log(block.verifyBlock(4))
 
-        chainIndia.parseChain(newChain.chain);
+        // const chainIndia = new Blockchain();
 
-        if (chainIndia.isChainValid() && chainIndia.getLength() >= blockChain.getLength()) {
-            blockChain.chain = chainIndia.chain;
-            console.log(blockChain.chain)
-            console.log("Network Balanced");
-            process.env.BREAK = "false";
-        }
+        // chainIndia.parseChain(unverifiedBlock.chain);
+
+        // if (chainIndia.isChainValid() && chainIndia.getLength() >= blockChain.getLength()) {
+        //     blockChain.chain = chainIndia.chain;
+        //     console.log(blockChain.chain)
+        //     console.log("Network Balanced");
+        //     process.env.BREAK = "false";
+        // }
     });
 
     socket.on("ADD_WALLET", (wallet) => {
