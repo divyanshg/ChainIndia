@@ -1,7 +1,7 @@
 const SocketActions = require('./constants');
 
 const Transaction = require('../models/transaction');
-const Blockchain = require('../models/chain');
+const Block = require('../models/block');
 
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
