@@ -115,7 +115,6 @@ Blocks.find({}, (err, blocks) => {
     });
 
     chainIndia.addNode(socketListeners(client(`http://localhost:${PORT}`), chainIndia));
-    chainIndia.addNode(socketListeners(client(`http://ip-10-1-1-154:${PORT}`), chainIndia));
 
 })
 httpServer.listen(PORT, () => console.info(`Express server running on ${PORT}...`));
