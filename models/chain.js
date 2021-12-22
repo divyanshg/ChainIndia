@@ -20,7 +20,7 @@ const Blocks = require('../database/schema/Blocks');
 
 class BlockChain {
     constructor(chain, io) {
-        this.chain = chain && chain.length !=0 ? chain : [this.createGenesisBlock()];
+        this.chain =  [this.createGenesisBlock()]; //chain && chain.length !=0 ? chain :
         this.difficulty = 4;
         this.pendingTransactions = [];
         this.io = io
