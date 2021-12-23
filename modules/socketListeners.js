@@ -27,11 +27,12 @@ const socketListeners = (socket, blockChain) => {
         process.env.BREAK = "true";
         blockChain.miner.kill()
 
-        const block = new Block(unverifiedBlock.timestamp, unverifiedBlock.transactions, unverifiedBlock.previousHash, unverifiedBlock.nonce, unverifiedBlock.miner);
-        // console.log(block.verifyBlock(4), block.hash, block.nonce);
-
+        const block = new Block(unverifiedBlock.timestamp, unverifiedBlock.transactions, unverifiedBlock.previousHash);
         console.log(block)
-        console.log(unverifiedBlock)
+        block.nonce = unverifiedBlock.nonce;
+        block.miner = unverifiedBlock.miner;
+        console.log(block)
+        // console.log(block.verifyBlock(4), block.hash, block.nonce);
 
         // const chainIndia = new Blockchain();
 
