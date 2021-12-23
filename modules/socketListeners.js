@@ -5,6 +5,8 @@ const Block = require('../models/block');
 
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
+const SHA256 = require('crypto-js/sha256');
+
 
 // Your private key goes here
 const myKey = ec.keyFromPrivate(process.env.PRIVATE_KEY);
@@ -30,9 +32,7 @@ const socketListeners = (socket, blockChain) => {
         const block = new Block(unverifiedBlock.timestamp, unverifiedBlock.transactions, unverifiedBlock.previousHash);
         block.nonce = unverifiedBlock.nonce;
         block.miner = unverifiedBlock.miner;
-        console.log(block)
-        block.calculateHash();
-        console.log(block.hash)
+        console.log(SHA256(block.version + unverifiedBlock.previousHash + unverifiedBlock.timestamp + block.merkleRoot + block.numberOfTransactions + block.size + unverifiedBlock.nonce).toString())
         // console.log(block.verifyBlock(4), block.hash, block.nonce);
 
         // const chainIndia = new Blockchain();

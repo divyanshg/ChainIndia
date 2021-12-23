@@ -85,8 +85,8 @@ class BlockChain {
             console.log('Block successfully mined!');
             // thisChain.chain.push(block);
 
-            const newBlock = new Blocks(block);
-            newBlock.save();
+            // const newBlock = new Blocks(block);
+            // newBlock.save();
             // console.log(block)
 
             var tmpio = thisChain.io
