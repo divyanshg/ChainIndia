@@ -32,8 +32,8 @@ const socketListeners = (socket, blockChain) => {
         const block = new Block(unverifiedBlock.timestamp, unverifiedBlock.transactions, unverifiedBlock.previousHash);
         block.nonce = unverifiedBlock.nonce;
         block.miner = unverifiedBlock.miner;
-        console.log(SHA256(block.version + unverifiedBlock.previousHash + unverifiedBlock.timestamp + block.merkleRoot + block.numberOfTransactions + block.size + unverifiedBlock.nonce).toString())
-        // console.log(block.verifyBlock(4), block.hash, block.nonce);
+        block.hash = SHA256(block.version + unverifiedBlock.previousHash + unverifiedBlock.timestamp + block.merkleRoot + block.numberOfTransactions + block.size + unverifiedBlock.nonce).toString()
+        console.log(block.verifyBlock(4))
 
         // const chainIndia = new Blockchain();
 
