@@ -3,6 +3,8 @@ const SocketActions = require('./constants');
 const Transaction = require('../models/transaction');
 const Block = require('../models/block');
 
+const Blocks = require('../database/schema/Blocks');
+
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 const SHA256 = require('crypto-js/sha256');
@@ -33,18 +35,17 @@ const socketListeners = (socket, blockChain) => {
         block.nonce = unverifiedBlock.nonce;
         block.miner = unverifiedBlock.miner;
         block.hash = SHA256(block.version + unverifiedBlock.previousHash + unverifiedBlock.timestamp + block.merkleRoot + block.numberOfTransactions + block.size + unverifiedBlock.nonce).toString()
-        console.log(block.verifyBlock(4))
 
-        // const chainIndia = new Blockchain();
+        if (block.verifyBlock(4)) {
+            blockChain.chain.push(block);
+            
+            const newBlock = new Blocks(block);
+            newBlock.save();
 
-        // chainIndia.parseChain(unverifiedBlock.chain);
-
-        // if (chainIndia.isChainValid() && chainIndia.getLength() >= blockChain.getLength()) {
-        //     blockChain.chain = chainIndia.chain;
-        //     console.log(blockChain.chain)
-        //     console.log("Network Balanced");
-        //     process.env.BREAK = "false";
-        // }
+            console.log(blockChain.chain)
+            console.log("Network Balanced");
+            process.env.BREAK = "false";
+        }
     });
 
     socket.on("ADD_WALLET", (wallet) => {

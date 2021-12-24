@@ -20,7 +20,7 @@ const Blocks = require('../database/schema/Blocks');
 
 class BlockChain {
     constructor(chain, io) {
-        this.chain =  [this.createGenesisBlock()]; //chain && chain.length !=0 ? chain :
+        this.chain =  chain && chain.length !=0 ? chain : [this.createGenesisBlock()]; 
         this.difficulty = 4;
         this.pendingTransactions = [];
         this.io = io
@@ -66,7 +66,7 @@ class BlockChain {
     async minePendingTransactions() {
         // const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
         // this.pendingTransactions.push(rewardTx);=
-            // const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+        // const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
         const block = {
             timestamp: Date.now(),
             transactions: this.pendingTransactions,
@@ -85,9 +85,8 @@ class BlockChain {
             console.log('Block successfully mined!');
             // thisChain.chain.push(block);
 
-            // const newBlock = new Blocks(block);
-            // newBlock.save();
-            // console.log(block)
+            const newBlock = new Blocks(block);
+            newBlock.save();
 
             var tmpio = thisChain.io
             var tmpnode = thisChain.nodes
